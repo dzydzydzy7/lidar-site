@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <style type="text/css">
+        #big-pic {
+            width: 60%;
+            margin: 0 auto;
+        }
+    </style>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="common/header::header"></div>
+<h1 align="center">home</h1>
+<div class="layui-col-md12">
+    <div class="layui-card">
+        <div class="layui-card-body" style="text-align: center">
+            <img id="big-pic" src="" alt=""/>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+
+    //ajax请求区域
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var index = null;
+        var $ = layui.jquery;
+        $.ajax({
+            url:'/homeC/pic',
+            method:'post',
+            data:{},
+            dataType:'JSON',
+            async:true,
+            success:function(res){
+                console.log(res);
+                $("#big-pic").attr("src", res.url);
+            },
+            error:function (data) {
+                console.log(data)
+            }
+        });
+    });
+</script>
+</body>
+</html>
