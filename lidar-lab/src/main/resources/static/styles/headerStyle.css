@@ -1,3 +1,11 @@
+.mobile {
+    display: none;
+}
+
+.mobile * {
+    display: none;
+}
+
 .layui-nav * {
     font-size: 16px;
 }
@@ -22,3 +30,5 @@
 .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
     background-color: #1E9FFF;  /* 覆盖时底下横杠的颜色 */
 }
+
+

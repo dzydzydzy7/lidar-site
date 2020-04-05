@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>测试页面</title>
-    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+
 </head>
 <body>
-<div th:fragment="header" class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">Lidar Lab</div>
-        <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a th:href="@{/LidarLab/home}">home</a></li>
-            <li class="layui-nav-item"><a th:href="@{/LidarLab/people}">people</a></li>
-            <li class="layui-nav-item"><a th:href="@{/LidarLab/publications}">publications</a></li>
-            <li class="layui-nav-item"><a th:href="@{/LidarLab/research}">research</a></li>
-            <li class="layui-nav-item"><a th:href="@{/LidarLab/gallery}">gallery</a></li>
-            <li class="layui-nav-item"><a th:href="@{/LidarLab/aboutUs}">about us</a></li>
+<div th:fragment="header">
+    <div class="layui-layout layui-layout-admin desktop">
+        <div class="layui-header">
+            <div class="layui-logo">Lidar Lab</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a th:href="@{/LidarLab/home}">home</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarLab/people}">people</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarLab/publications}">publications</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarLab/research}">research</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarLab/gallery}">gallery</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarLab/aboutUs}">about us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mobile">
+        <ul class="layui-nav">
+            <li class="layui-nav-item layui-this" style="width: 100%;">
+                <a href="#">Lidar Lab</a>
+                <dl class="layui-nav-child">
+                    <dd><a th:href="@{/LidarLab/home}">home</a></dd>
+                    <dd><a th:href="@{/LidarLab/people}">people</a></dd>
+                    <dd><a th:href="@{/LidarLab/publications}">publications</a></dd>
+                    <dd><a th:href="@{/LidarLab/research}">research</a></dd>
+                    <dd><a th:href="@{/LidarLab/gallery}">gallery</a></dd>
+                    <dd><a th:href="@{/LidarLab/aboutUs}">aboutUs</a></dd>
+                </dl>
+            </li>
         </ul>
     </div>
 </div>

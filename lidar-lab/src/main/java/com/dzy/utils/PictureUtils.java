@@ -11,12 +11,11 @@ public class PictureUtils {
     private ProgramUtils programUtils;
 
     public String image2Url(String str){
-        str = str.toLowerCase();
         String res = programUtils.getBaseUrl();
         String[] strs = str.split("\\.");
         if (strs.length != 2){
             throw new IllegalArgumentException("not a picture, it should be xxx.xxx");
         }
-        return res + strs[1] + "/" + strs[0];
+        return res + strs[1].toLowerCase() + "/" + strs[0];
     }
 }

@@ -2,9 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>测试页面</title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
-    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet">
+    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
+    <link th:href="@{/styles/headerMobile.css}" rel="stylesheet" media="screen and (max-width: 1179px)">
 </head>
 <body>
 <div th:replace="common/header::header"></div>

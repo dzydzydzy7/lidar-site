@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>后台管理测试</title>
@@ -7,9 +7,46 @@
 <body>
 <form action="/settings/home" method="post">
     <p>home页面：</p>
-    <label for="url">第一张大图</label><input type="text" id="url" name="url"/>
-    <label for="describe"></label><textarea id="describe" name="describe"></textarea>
-    <input type="submit" value="应用更改">
+    <label for="url">第一张大图：</label><input type="text" id="url" name="url" value="1234"/><br>
+    <label for="describe">描述：</label><textarea id="describe" name="describe" rows="20" cols="128" placeholder="1234"></textarea>
+    <br><input type="submit" value="应用更改">
+    <hr>
 </form>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+
+    function url2img(url){
+        var strs = url.split("/");
+        return strs.pop() + "." + strs.pop();
+    }
+
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+
+    //ajax请求区域
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var index = null;
+        var $ = layui.jquery;
+        $.ajax({
+            url:'/homeC/pic',
+            method:'post',
+            data:{},
+            dataType:'JSON',
+            async:true,
+            success:function(res){
+                console.log(res);
+                $("#url").attr("value", url2img(res.url));
+                $("#describe").val(res.describe);
+            },
+            error:function (data) {
+                console.log(data)
+            }
+        });
+    });
+</script>
 </body>
 </html>

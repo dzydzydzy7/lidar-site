@@ -1,5 +1,6 @@
 package com.dzy.controller;
 
+import com.dzy.dao.HomeDao;
 import com.dzy.pojo.Home;
 import com.dzy.utils.PictureUtils;
 import com.dzy.utils.ProgramUtils;
@@ -17,8 +18,11 @@ public class HomeController {
     @Autowired
     private PictureUtils pictureUtils;
 
+    @Autowired
+    private HomeDao homeDao;
+
     @PostMapping(value = "/pic")
     public Home bigPic(){
-        return new Home(pictureUtils.image2Url("thegif.gif"), "a\nb\nc");
+        return homeDao.getValues();
     }
 }

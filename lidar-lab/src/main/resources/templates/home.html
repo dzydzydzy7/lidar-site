@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>测试页面</title>
     <style type="text/css">
         #big-pic {
@@ -10,15 +11,20 @@
         }
     </style>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
-    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet">
+    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
+    <link th:href="@{/styles/headerMobile.css}" rel="stylesheet" media="screen and (max-width: 1179px)">
 </head>
 <body>
+
 <div th:replace="common/header::header"></div>
 <h1 align="center">home</h1>
 <div class="layui-col-md12">
     <div class="layui-card">
         <div class="layui-card-body" style="text-align: center">
             <img id="big-pic" src="" alt=""/>
+        </div>
+        <div class="layui-card-body" id="describe" style="text-align: center">
+
         </div>
     </div>
 </div>
@@ -44,6 +50,7 @@
             success:function(res){
                 console.log(res);
                 $("#big-pic").attr("src", res.url);
+                $("#describe").html(res.describe);
             },
             error:function (data) {
                 console.log(data)
