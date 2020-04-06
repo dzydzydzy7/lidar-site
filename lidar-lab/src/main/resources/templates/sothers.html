@@ -1,18 +1,18 @@
 <!DOCTYPE html>
+<html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="_csrf" th:content="${_csrf.token}">
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <title>测试页面</title>
+    <title>后台管理测试</title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
-    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
-    <link th:href="@{/styles/headerMobile.css}" rel="stylesheet" media="screen and (max-width: 1179px)">
 </head>
 <body>
-<div th:replace="common/header::header"></div>
-<h1 align="center">research</h1>
+<div th:replace="common/SHeader::sheader"></div>
+
+这个页面的主要功能是用户管理和图片资源管理
+
 <script th:src="@{/layui/layui.js}"></script>
 <script>
     layui.use('jquery',function() {
@@ -24,7 +24,7 @@
         });
     });
     //JavaScript代码区域
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
     });
 </script>

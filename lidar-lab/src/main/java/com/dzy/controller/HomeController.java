@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/homeC")
 public class HomeController {
     @Autowired
     private ProgramUtils programUtils;
@@ -21,7 +20,7 @@ public class HomeController {
     @Autowired
     private HomeDao homeDao;
 
-    @PostMapping(value = "/pic")
+    @PostMapping(value = "/homeelems")
     public Home bigPic(){
         return homeDao.getValues();
     }

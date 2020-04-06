@@ -23,8 +23,10 @@ public class SettingController {
 
     @PostMapping(value = "/home")
     public String setHome(Home home) {
+        System.out.println("进入/setting/home");
         home.setUrl(pictureUtils.image2Url(home.getUrl()));
         homeDao.setValues(home);
-        return "redirect:/LidarLab/set";
+        System.out.println("完成设置");
+        return "redirect:/LidarSet/home";
     }
 }

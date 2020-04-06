@@ -2,34 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="_csrf" th:content="${_csrf.token}">
     <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <title>测试页面</title>
-    <style type="text/css">
-        #big-pic {
-            width: 60%;
-            margin: 0 auto;
-        }
-    </style>
+    <title>后台管理测试</title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
-    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
-    <link th:href="@{/styles/headerMobile.css}" rel="stylesheet" media="screen and (max-width: 1179px)">
 </head>
 <body>
-
-<div th:replace="common/header::header"></div>
-<h1 align="center">home</h1>
-<div class="layui-col-md12">
-    <div class="layui-card">
-        <div class="layui-card-body" style="text-align: center">
-            <img id="big-pic" src="" alt=""/>
-        </div>
-        <div class="layui-card-body" id="describe" style="text-align: center">
-
-        </div>
-    </div>
-</div>
+<div th:replace="common/SHeader::sheader"></div>
+<form th:action="@{/settings/home}" method="post">
+    <p>home页面：</p>
+    <label for="url">第一张大图：</label><input type="text" id="url" name="url" value="1234"/><br>
+    <label for="describe">描述：</label><textarea id="describe" name="describe" rows="20" cols="128" placeholder="1234"></textarea>
+    <br><input type="submit" value="应用更改">
+    <hr>
+</form>
 
 <script th:src="@{/layui/layui.js}"></script>
 <script>
@@ -49,7 +35,6 @@
 
     //ajax请求区域
     layui.use('layer', function () {
-
         var layer = layui.layer;
         var index = null;
         var $ = layui.jquery;
@@ -61,14 +46,19 @@
             async:true,
             success:function(res){
                 console.log(res);
-                $("#big-pic").attr("src", res.url);
-                $("#describe").html(res.describe);
+                $("#url").attr("value", url2img(res.url));
+                $("#describe").val(res.describe);
             },
             error:function (data) {
                 console.log(data)
             }
         });
     });
+
+    function url2img(url){
+        var strs = url.split("/");
+        return strs.pop() + "." + strs.pop();
+    }
 </script>
 </body>
 </html>

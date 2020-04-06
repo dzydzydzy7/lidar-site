@@ -5,35 +5,40 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/LidarLab")
-public class PageController {
+@RequestMapping("/LidarSet")
+public class BackPageController {
     @RequestMapping("/home")
-    public String homePage(Model model) {
-        return "home";
+    public String backDoorPage(Model model) {
+        return "shome";
     }
 
     @RequestMapping("/people")
     public String peoplePage(Model model) {
-        return "people";
+        return "speople";
     }
 
     @RequestMapping("/publications")
     public String publicationsPage(Model model) {
-        return "publications";
+        return "spublications";
     }
 
     @RequestMapping("/research")
     public String researchPage(Model model) {
-        return "research";
+        return "sresearch";
     }
 
     @RequestMapping("/gallery")
     public String galleryPage(Model model) {
-        return "gallery";
+        return "sgallery";
     }
 
     @RequestMapping("/aboutUs")
     public String aboutUsPage(Model model) {
-        return "aboutUs";
+        return "saboutUs";
+    }
+
+    @RequestMapping("/others")
+    public String otherPage(Model model) {
+        return "sothers";
     }
 }
