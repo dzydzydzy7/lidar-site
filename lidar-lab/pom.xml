@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dzy</groupId>
     <artifactId>lidar-lab</artifactId>
-    <version>0.0.6-security</version>
+    <version>0.0.7-users</version>
     <name>lidar-lab</name>
     <description>Demo project for Spring Boot</description>
 

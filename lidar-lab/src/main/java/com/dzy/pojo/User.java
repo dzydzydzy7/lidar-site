@@ -13,5 +13,5 @@ import java.io.Serializable;
 @Component
 public class User implements Serializable {
     private String userName;
-    private String passwd;
+    private String password;
 }
