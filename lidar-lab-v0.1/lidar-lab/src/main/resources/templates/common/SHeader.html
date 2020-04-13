@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+</head>
+<body>
+<div th:fragment="sheader">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">Lidar Lab</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/home}">home</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/people}">people</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/publications}">publications</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/research}">research</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/gallery}">gallery</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/aboutUs}">about us</a></li>
+                <li class="layui-nav-item"><a th:href="@{/LidarSet/others}">other settings</a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item"><a th:href="@{/logout}">log out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

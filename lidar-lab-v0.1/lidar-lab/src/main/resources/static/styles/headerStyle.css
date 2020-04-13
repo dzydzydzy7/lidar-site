@@ -1,0 +1,40 @@
+.mobile {
+    display: none;
+}
+
+.mobile * {
+    display: none;
+}
+
+.desktop {
+    position: fixed;
+    top: 0px;
+    z-index:999;
+}
+
+.layui-nav * {
+    font-size: 16px;
+}
+
+.layui-nav .layui-nav-item a {
+    color: #0C0C0C; /* 导航栏字体颜色 */
+}
+
+.layui-nav .layui-nav-item a:hover {
+    color: #007DDB; /* 导航栏字体颜色 */
+}
+
+.layui-layout-admin .layui-header {
+    background-color: #f2f2f2;  /* 导航栏背景颜色 */
+}
+
+.layui-nav .layui-nav-item {
+    width: 150px;
+    text-align: center;
+}
+
+.layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed:after {
+    background-color: #1E9FFF;  /* 覆盖时底下横杠的颜色 */
+}
+
+
