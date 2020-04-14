@@ -27,9 +27,13 @@ public class AjaxController {
     @Autowired
     private UserDao userDao;
 
-    @PostMapping(value = "/homeelems")
-    public Home bigPic(){
-        return homeDao.getValues();
+    @PostMapping(value = "/getPics")
+    public List<String> getPics(){
+        List<String> list = new ArrayList<>();
+        list.add("/pic/1.PNG");
+        list.add("/pic/2.PNG");
+        list.add("/pic/3.PNG");
+        return list;
     }
 
     @PostMapping(value = "/getAllUsers")
