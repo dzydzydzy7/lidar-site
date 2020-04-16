@@ -1,5 +1,7 @@
 package com.dzy.controller;
 
+import com.dzy.service.BannerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/LidarSet")
 public class BackPageController {
+    @Autowired
+    private BannerService bannerService;
+
     @RequestMapping("/home")
     public String backDoorPage(Model model) {
+        model.addAttribute("pics", bannerService.getAllBanner());
         return "shome";
     }
 

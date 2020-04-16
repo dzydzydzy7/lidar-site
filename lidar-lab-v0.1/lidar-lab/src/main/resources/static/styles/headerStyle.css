@@ -37,4 +37,18 @@
     background-color: #1E9FFF;  /* 覆盖时底下横杠的颜色 */
 }
 
+.pic-comment{
+    position:absolute;
+    z-index:2;
+    left: 50%;
+    top: 50%;
+    font-size: 3rem;
+    text-align: center;
+    display: none;
+    color: #93D1FF;
+    font-family: "DejaVu Sans",serif;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 2px black;
+}
+
 

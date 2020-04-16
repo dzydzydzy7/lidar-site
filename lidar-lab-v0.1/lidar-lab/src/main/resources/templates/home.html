@@ -14,19 +14,6 @@
             max-width: 100%;
             max-height: 100%;
         }
-        .pic-comment{
-            position:absolute;
-            z-index:2;
-            left: 50%;
-            top: 50%;
-            text-align: center;
-            display: none;
-            font-size: 40px;
-            color: #93D1FF;
-            font-family: "DejaVu Sans",serif;
-            transform: translate(-50%, -50%);
-            text-shadow: 0 0 2px black;
-        }
     </style>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
     <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
@@ -54,8 +41,11 @@
         });
         // 使banner自适应屏幕宽度
         autofitHeight();
+        // 图片上的字体大小自适应屏幕宽度
+        $('.pic-comment').css("font-size", $("#the_banner").width() * 0.04 + "px");
         $(window).resize(function () {
             autofitHeight();
+            $('.pic-comment').css("font-size", $("#the_banner").width() * 0.04 + "px");
         });
 
         function autofitHeight() {
@@ -86,13 +76,13 @@
             method:'post',
             data:{},
             dataType:'JSON',
-            async:true,
+            async:false,
             success:function(res){
                 var html = "";
                 for (var i = 0; i < res.length; i++) {
                     html += '<div>'
-                        + '<img src="' + res[i] + '">'
-                        + '<div class="pic-comment"><p>测试文字</p></div>'
+                        + '<img src="' + res[i].picture + '">'
+                        + '<div class="pic-comment"><p>' + res[i].text + '</p></div>'
                         + '</div>';
                 }
                 $("#pic-container").html(html);

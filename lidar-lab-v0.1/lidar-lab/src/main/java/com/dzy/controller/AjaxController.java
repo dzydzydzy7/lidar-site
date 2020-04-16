@@ -2,8 +2,10 @@ package com.dzy.controller;
 
 import com.dzy.dao.HomeDao;
 import com.dzy.dao.UserDao;
+import com.dzy.pojo.Banner;
 import com.dzy.pojo.Home;
 import com.dzy.pojo.User;
+import com.dzy.service.BannerService;
 import com.dzy.utils.PictureUtils;
 import com.dzy.utils.ProgramUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +24,14 @@ public class AjaxController {
     private PictureUtils pictureUtils;
 
     @Autowired
-    private HomeDao homeDao;
+    private BannerService bannerService;
 
     @Autowired
     private UserDao userDao;
 
     @PostMapping(value = "/getPics")
-    public List<String> getPics(){
-        List<String> list = new ArrayList<>();
-        list.add("/pic/1.PNG");
-        list.add("/pic/2.PNG");
-        list.add("/pic/3.PNG");
+    public List<Banner> getPics(){
+        List<Banner> list = bannerService.getAllBanner();
         return list;
     }
 

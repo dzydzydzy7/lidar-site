@@ -26,9 +26,9 @@ class LidarLabApplicationTests {
     @Autowired
     private UserDao userDao;
 
-    @Test
-    void test1() {
-        List<User> users = userDao.selectList(null);
-        users.forEach(System.out::println);
-    }
+//    @Test
+//    void test1() {
+//        List<User> users = userDao.selectList(null);
+//        users.forEach(System.out::println);
+//    }
 }
