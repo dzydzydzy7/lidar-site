@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dzy</groupId>
     <artifactId>lidar-lab</artifactId>
-    <version>0.1.1-banner</version>
+    <version>0.1.2-people</version>
     <name>lidar-lab</name>
     <description>Demo project for Spring Boot</description>
 
@@ -44,6 +44,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
         </dependency>
 
         <!--thymeleaf-->

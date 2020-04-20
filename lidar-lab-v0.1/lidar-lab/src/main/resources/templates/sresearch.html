@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+<!--    <meta name="_csrf" th:content="${_csrf.token}">-->
+<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}">-->
     <title>后台管理测试</title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
 </head>
@@ -14,11 +14,11 @@
 <script>
     layui.use('jquery',function() {
         var $= layui.jquery;
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        $(document).ajaxSend(function (e, xhr, options) {
-            xhr.setRequestHeader(header, token);
-        });
+        // var token = $("meta[name='_csrf']").attr("content");
+        // var header = $("meta[name='_csrf_header']").attr("content");
+        // $(document).ajaxSend(function (e, xhr, options) {
+        //     xhr.setRequestHeader(header, token);
+        // });
     });
     //JavaScript代码区域
     layui.use('element', function () {
