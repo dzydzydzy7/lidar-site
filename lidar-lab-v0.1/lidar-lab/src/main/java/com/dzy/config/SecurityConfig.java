@@ -22,6 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 只拦截LidarSet开头的URL
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/LidarSet/home").hasAnyAuthority("admin", "pager")
+                .antMatchers("/LidarSet/people").hasAnyAuthority("admin", "pager")
+                .antMatchers("/LidarSet/settings/**").hasAnyAuthority("admin", "pager")
                 .antMatchers("/LidarSet/others").hasAuthority("admin");
         // 使用默认的登录页面
         http.formLogin();

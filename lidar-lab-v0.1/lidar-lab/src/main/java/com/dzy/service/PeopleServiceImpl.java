@@ -30,6 +30,11 @@ public class PeopleServiceImpl implements PeopleService {
     }
 
     @Override
+    public List<People> getAllPeople() {
+        return peopleDao.selectList(null);
+    }
+
+    @Override
     public List<People> getAllStudent() {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "S");
@@ -41,5 +46,15 @@ public class PeopleServiceImpl implements PeopleService {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "T");
         return peopleDao.selectByMap(map);
+    }
+
+    @Override
+    public void deletePeopleById(int id) {
+        peopleDao.deleteById(id);
+    }
+
+    @Override
+    public void updatePeopleById(People people) {
+        peopleDao.updateById(people);
     }
 }

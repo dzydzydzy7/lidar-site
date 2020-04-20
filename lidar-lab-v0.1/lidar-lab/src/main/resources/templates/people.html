@@ -18,59 +18,19 @@
 
 <div style="padding: 20px; background-color: #fcfcfc;">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
-                <div class="layui-card-body">
-                    卡片式面板面板通常用于非白色背景色的主体内<br>
-                    从而映衬出边框投影
+        <div class="layui-col-md3" th:each="teacher :${teachers}">
+            <a th:href="@{'/LidarLab/people/' + ${teacher.id}}">
+                <div class="layui-card">
+                    <div class="layui-card-body" style="text-align: center">
+                        <div align="center" class="stu-photo" style="width: 90%; margin: 0 auto; padding: 0;">
+                            <img th:src="@{'/pic/' + ${teacher.picture}}" style="width: 100%; height: 100%">
+                        </div>
+                    </div>
+                    <div class="layui-card-header">
+                        <p th:text='${teacher.name}' style="text-align: center"></p>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
-                <div class="layui-card-body">
-                    结合 layui 的栅格系统<br>
-                    轻松实现响应式布局
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
-                <div class="layui-card-body">
-                    卡片式面板面板通常用于非白色背景色的主体内<br>
-                    从而映衬出边框投影
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
-                <div class="layui-card-body">
-                    结合 layui 的栅格系统<br>
-                    轻松实现响应式布局
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
-                <div class="layui-card-body">
-                    卡片式面板面板通常用于非白色背景色的主体内<br>
-                    从而映衬出边框投影
-                </div>
-            </div>
-        </div>
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
-                <div class="layui-card-body">
-                    结合 layui 的栅格系统<br>
-                    轻松实现响应式布局
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
@@ -85,8 +45,8 @@
             <a th:href="@{'/LidarLab/people/' + ${student.id}}">
                 <div class="layui-card">
                     <div class="layui-card-body" style="text-align: center">
-                        <div align="center" class="stu-photo" style="width: 90%; margin: 0 auto">
-                            <img th:src="@{'/pic/' + ${student.picture}}" style="max-width: 100%; object-fit: fill">
+                        <div align="center" class="stu-photo" style="width: 90%; margin: 0 auto; padding: 0;">
+                            <img th:src="@{'/pic/' + ${student.picture}}" style="width: 100%; height: 100%">
                         </div>
                     </div>
                     <div class="layui-card-header">

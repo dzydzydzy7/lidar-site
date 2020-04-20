@@ -1,10 +1,13 @@
 package com.dzy.controller;
 
+import com.dzy.pojo.People;
 import com.dzy.service.BannerService;
+import com.dzy.service.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BackPageController {
     @Autowired
     private BannerService bannerService;
+
+    @Autowired
+    private PeopleService peopleService;
 
     @RequestMapping("/home")
     public String backDoorPage(Model model) {
@@ -21,6 +27,8 @@ public class BackPageController {
 
     @RequestMapping("/people")
     public String peoplePage(Model model) {
+        model.addAttribute("ts", peopleService.getAllTeacher());
+        model.addAttribute("ss", peopleService.getAllStudent());
         return "speople";
     }
 

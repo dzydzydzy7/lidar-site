@@ -16,6 +16,7 @@ import com.dzy.utils.RedisUtils;
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -144,6 +145,45 @@ public class SettingController {
             }
         }
         peopleService.addPeople(name, filename, type, text);
+        return "redirect:/LidarSet/people";
+    }
+
+    @RequestMapping("/updPeople/{id}")
+    public String updPeople(@PathVariable int id, Model model) {
+        People people = peopleService.getPeopleById(id);
+        model.addAttribute("pp", people);
+        return "speopleUpd";
+    }
+
+    @RequestMapping("/peopleUpd/{id}")
+    public String peopleUdp(@PathVariable int id, String name, MultipartFile picture, String type, String text) {
+        String filename = null;
+        if (!picture.isEmpty()) {
+            String path = programUtils.getPicFolder();
+            filename = "p-" + UUID.randomUUID().toString().replaceAll("-", "");
+            File file = new File(path, filename);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            try {
+                picture.transferTo(new File(path + File.separator + filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        People p = new People();
+        p.setId(id);
+        p.setName(name);
+        p.setPicture(filename);
+        p.setType(type);
+        p.setDetail(text);
+        peopleService.updatePeopleById(p);
+        return "redirect:/LidarSet/people";
+    }
+
+    @RequestMapping("/delPeople/{id}")
+    public String delPeople(@PathVariable int id) {
+        peopleService.deletePeopleById(id);
         return "redirect:/LidarSet/people";
     }
 }

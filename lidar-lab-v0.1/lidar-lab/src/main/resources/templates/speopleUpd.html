@@ -14,14 +14,15 @@
 <body>
 <div th:replace="common/SHeader::sheader"></div>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>添加成员</legend>
+    <legend>修改成员</legend>
 </fieldset>
+<p style="color: red;padding-left: 20px">注：如果不需要修改照片，就不用上传照片</p>
 <!--博客表单-->
-<form class="layui-form" name="mdEditorForm" th:action="@{/settings/addPeople}"  method="post" enctype="multipart/form-data">
+<form class="layui-form" name="mdEditorForm" th:action="@{'/settings/peopleUpd/' + ${pp.id}}"  method="post" enctype="multipart/form-data">
     <div class="layui-form-item">
         <label for="name" class="layui-form-label">名字</label>
         <div class="layui-input-inline">
-            <input type="text" name="name" id="name" class="layui-input">
+            <input type="text" name="name" id="name" class="layui-input" th:value="${pp.name}">
         </div>
     </div>
     <label for="a-pic" class="layui-form-label">上传照片</label>
@@ -29,53 +30,19 @@
     <div class="layui-form-item">
         <label class="layui-form-label">类型</label>
         <div class="layui-input-block">
-            <input type="radio" name="type" value="S" title="学生" checked="">
-            <input type="radio" name="type" value="T" title="老师">
+            <input type="radio" name="type" value="S" title="学生" th:checked="${pp.type == 'S'} ? true : false">
+            <input type="radio" name="type" value="T" title="老师" th:checked="${pp.type == 'T'} ? true : false">
         </div>
     </div>
     <div id="article-content">
-        <textarea name="text" id="content" style="display:none;" > </textarea>
+        <textarea name="text" id="content" style="display:none;" >[[${pp.detail}]] </textarea>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button type="submit" class="layui-btn">添加成员</button>
+            <button type="submit" class="layui-btn">提交修改</button>
         </div>
     </div>
 </form>
-
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>已有成员</legend>
-</fieldset>
-
-<div class="layui-form">
-    <table class="layui-table">
-        <thead>
-        <tr>
-            <td>姓名</td><td>照片</td><td>类型(T教师S学生)</td><td>操作</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="t: ${ts}">
-            <td th:text="${t.name}"></td>
-            <td><img style="width: 150px; height: 200px; max-width: 300px" th:src="@{'/pic/' + ${t.picture}}" alt="tupian"></td>
-            <td th:text="${t.type}"></td>
-            <td>
-                <a th:href="@{'/settings/updPeople/' + ${t.id} }">修改</a>
-                <a th:href="@{'/settings/delPeople/' + ${t.id} }">删除</a>
-            </td>
-        </tr>
-        <tr th:each="s: ${ss}">
-            <td th:text="${s.name}"></td>
-            <td><img style="width: 150px; height: 200px; max-width: 300px" th:src="@{'/pic/' + ${s.picture}}" alt="tupian"></td>
-            <td th:text="${s.type}"></td>
-            <td>
-                <a th:href="@{'/settings/updPeople/' + ${s.id} }">修改</a>
-                <a th:href="@{'/settings/delPeople/' + ${s.id} }">删除</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 <script th:src="@{/layui/layui.js}"></script>
 <script th:src="@{/editormd/examples/js/jquery.min.js}"></script>
@@ -85,9 +52,9 @@
     $(function () {
         testEditor = editormd("article-content", {
             width: "95%",
-            height: 400,
+            height: 640,
             syncScrolling: "single",
-            path: "../editormd/lib/",
+            path: "../../editormd/lib/",
             saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
             emoji: true,
             theme: "dark",//工具栏主题
