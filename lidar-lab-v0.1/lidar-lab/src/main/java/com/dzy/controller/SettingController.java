@@ -7,9 +7,11 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.dzy.dao.UserDao;
 import com.dzy.pojo.Home;
 import com.dzy.pojo.People;
+import com.dzy.pojo.Research;
 import com.dzy.pojo.User;
 import com.dzy.service.BannerService;
 import com.dzy.service.PeopleService;
+import com.dzy.service.ResearchService;
 import com.dzy.utils.PictureUtils;
 import com.dzy.utils.ProgramUtils;
 import com.dzy.utils.RedisUtils;
@@ -46,19 +48,12 @@ public class SettingController {
     @Autowired
     private PeopleService peopleService;
 
+    @Autowired
+    private ResearchService researchService;
+
     @PostMapping(value = "/addBanner")
     public String setHome(MultipartFile picture, String text) {
-        String path = programUtils.getPicFolder();
-        String filename = "img-" + UUID.randomUUID().toString().replaceAll("-", "");
-        File file = new File(path, filename);
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
-        }
-        try {
-            picture.transferTo(new File(path + File.separator + filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String filename = uploadPicture(picture, "", "img-");
         bannerService.addBannerPic(filename, text);
         return "redirect:/LidarSet/home";
     }
@@ -130,20 +125,7 @@ public class SettingController {
 
     @PostMapping(value = "/addPeople")
     public String addPeople(String name, MultipartFile picture, String type, String text) {
-        String filename = "";
-        if (!picture.isEmpty()) {
-            String path = programUtils.getPicFolder();
-            filename = "p-" + UUID.randomUUID().toString().replaceAll("-", "");
-            File file = new File(path, filename);
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-            try {
-                picture.transferTo(new File(path + File.separator + filename));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        String filename = uploadPicture(picture, "", "p-");
         peopleService.addPeople(name, filename, type, text);
         return "redirect:/LidarSet/people";
     }
@@ -157,20 +139,7 @@ public class SettingController {
 
     @RequestMapping("/peopleUpd/{id}")
     public String peopleUdp(@PathVariable int id, String name, MultipartFile picture, String type, String text) {
-        String filename = null;
-        if (!picture.isEmpty()) {
-            String path = programUtils.getPicFolder();
-            filename = "p-" + UUID.randomUUID().toString().replaceAll("-", "");
-            File file = new File(path, filename);
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-            try {
-                picture.transferTo(new File(path + File.separator + filename));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        String filename = uploadPicture(picture, null, "p-");
         People p = new People();
         p.setId(id);
         p.setName(name);
@@ -185,5 +154,56 @@ public class SettingController {
     public String delPeople(@PathVariable int id) {
         peopleService.deletePeopleById(id);
         return "redirect:/LidarSet/people";
+    }
+
+    @PostMapping(value = "/addResearch")
+    public String addResearch(String name, MultipartFile picture, String text) {
+        String filename = uploadPicture(picture, "", "r-");
+        researchService.addResearch(name, filename, text);
+        return "redirect:/LidarSet/research";
+    }
+
+    @RequestMapping("/updResearch/{id}")
+    public String updResearch(@PathVariable int id, Model model) {
+        Research research = researchService.getResearchById(id);
+        model.addAttribute("rsh", research);
+        return "sresearchUpd";
+    }
+
+    @RequestMapping("/researchUpd/{id}")
+    public String researchUpd(@PathVariable int id, String name, MultipartFile picture, String text) {
+        String filename = uploadPicture(picture, null, "r-");
+        Research research = new Research();
+        research.setId(id);
+        research.setName(name);
+        research.setPicture(filename);
+        research.setDetail(text);
+        researchService.updateResearchById(research);
+        return "redirect:/LidarSet/research";
+    }
+
+    @RequestMapping("/delResearch/{id}")
+    public String delResearch(@PathVariable int id) {
+        researchService.deleteResearchById(id);
+        return "redirect:/LidarSet/research";
+    }
+
+    // 上传图片
+    private String uploadPicture(MultipartFile picture,String defaultName, String prefix) {
+        String filename = defaultName;
+        if (!picture.isEmpty()) {
+            String path = programUtils.getPicFolder();
+            filename = prefix + UUID.randomUUID().toString().replaceAll("-", "");
+            File file = new File(path, filename);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            try {
+                picture.transferTo(new File(path + File.separator + filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return filename;
     }
 }

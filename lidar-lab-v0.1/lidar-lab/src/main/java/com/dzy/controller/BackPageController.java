@@ -1,8 +1,10 @@
 package com.dzy.controller;
 
 import com.dzy.pojo.People;
+import com.dzy.pojo.Research;
 import com.dzy.service.BannerService;
 import com.dzy.service.PeopleService;
+import com.dzy.service.ResearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class BackPageController {
 
     @Autowired
     private PeopleService peopleService;
+
+    @Autowired
+    private ResearchService researchService;
 
     @RequestMapping("/home")
     public String backDoorPage(Model model) {
@@ -39,6 +44,7 @@ public class BackPageController {
 
     @RequestMapping("/research")
     public String researchPage(Model model) {
+        model.addAttribute("rs", researchService.getAllResearch());
         return "sresearch";
     }
 

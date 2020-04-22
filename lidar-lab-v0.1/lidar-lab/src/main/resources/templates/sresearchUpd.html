@@ -13,53 +13,29 @@
 </head>
 <body>
 <div th:replace="common/SHeader::sheader"></div>
-
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>添加研究</legend>
+    <legend>修改研究</legend>
 </fieldset>
+<p style="color: red;padding-left: 20px">注：如果不需要修改照片，就不用上传照片</p>
 <!--博客表单-->
-<form class="layui-form" name="mdEditorForm" th:action="@{/settings/addResearch}"  method="post" enctype="multipart/form-data">
+<form class="layui-form" name="mdEditorForm" th:action="@{'/settings/researchUpd/' + ${rsh.id}}"  method="post" enctype="multipart/form-data">
     <div class="layui-form-item">
-        <label for="name" class="layui-form-label">研究名称</label>
+        <label for="name" class="layui-form-label">名字</label>
         <div class="layui-input-inline">
-            <input type="text" name="name" id="name" class="layui-input">
+            <input type="text" name="name" id="name" class="layui-input" th:value="${rsh.name}">
         </div>
     </div>
-    <label for="a-pic" class="layui-form-label">上传图片</label>
+    <label for="a-pic" class="layui-form-label">上传照片</label>
     <input type="file" name="picture" id="a-pic">
     <div id="article-content">
-        <textarea name="text" id="content" style="display:none;" > </textarea>
+        <textarea name="text" id="content" style="display:none;" >[[${rsh.detail}]] </textarea>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button type="submit" class="layui-btn">添加研究</button>
+            <button type="submit" class="layui-btn">提交修改</button>
         </div>
     </div>
 </form>
-
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>已有研究</legend>
-</fieldset>
-
-<div class="layui-form">
-    <table class="layui-table">
-        <thead>
-        <tr>
-            <td>研究名称</td><td>封面图片</td><td>操作</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="r: ${rs}">
-            <td th:text="${r.name}"></td>
-            <td><img style="width: 200px; height: 150px; max-width: 300px" th:src="@{'/pic/' + ${r.picture}}" alt="tupian"></td>
-            <td>
-                <a th:href="@{'/settings/updResearch/' + ${r.id} }">修改</a>
-                <a th:href="@{'/settings/delResearch/' + ${r.id} }">删除</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 <script th:src="@{/layui/layui.js}"></script>
 <script th:src="@{/editormd/examples/js/jquery.min.js}"></script>
@@ -69,9 +45,9 @@
     $(function () {
         testEditor = editormd("article-content", {
             width: "95%",
-            height: 500,
+            height: 640,
             syncScrolling: "single",
-            path: "../editormd/lib/",
+            path: "../../editormd/lib/",
             saveHTMLToTextarea: true,    // 保存 HTML 到 Textarea
             emoji: true,
             theme: "dark",//工具栏主题

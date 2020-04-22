@@ -1,7 +1,9 @@
 package com.dzy.controller;
 
 import com.dzy.pojo.People;
+import com.dzy.pojo.Research;
 import com.dzy.service.PeopleService;
+import com.dzy.service.ResearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PageController {
     @Autowired
     private PeopleService peopleService;
+
+    @Autowired
+    private ResearchService researchService;
 
     @RequestMapping("/home")
     public String homePage(Model model) {
@@ -33,6 +38,7 @@ public class PageController {
 
     @RequestMapping("/research")
     public String researchPage(Model model) {
+        model.addAttribute("researches", researchService.getAllResearch());
         return "research";
     }
 
@@ -51,5 +57,12 @@ public class PageController {
         People people = peopleService.getPeopleById(id);
         model.addAttribute("people", people);
         return "peopleDetail";
+    }
+
+    @RequestMapping("/research/{id}")
+    public String researchDetail(@PathVariable int id, Model model) {
+        Research research = researchService.getResearchById(id);
+        model.addAttribute("research", research);
+        return "researchDetail";
     }
 }
