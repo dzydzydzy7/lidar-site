@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title th:text="aboutus"></title>
+    <title th:text="project"></title>
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
     <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
     <link th:href="@{/styles/headerMobile.css}" rel="stylesheet" media="screen and (max-width: 1179px)">
@@ -52,17 +52,20 @@
 
         $(function () {
             $("#doc-content").find("img").each(function () {
-                $(this).css("max-width", "70%");
+                $(this).css("max-width", "60%");
                 // 这一句使得图片居中，editormd本身没有居中功能
                 $(this).wrap("<div align='center'></div>");
             });
             $("#doc-content").find("h1").each(function () {
+                $(this).css("font-family", "Italic");
+                $(this).css("font-style", "Italic");
                 $(this).css("font-weight", "normal");
-                $(this).css("border-bottom", "0px");
-                $(this).css("text-align", "center");
+                $(this).css("border-bottom", "1px solid #333");
             });
-            $("#doc-content").find("p").each(function () {
+            $("#doc-content").find("h2").each(function () {
                 $(this).css("text-align", "center");
+                $(this).css("font-weight", "normal");
+                $(this).css("border-bottom", "0");
             });
         })
     });

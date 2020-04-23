@@ -24,6 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/LidarSet/home").hasAnyAuthority("admin", "pager")
                 .antMatchers("/LidarSet/people").hasAnyAuthority("admin", "pager")
                 .antMatchers("/LidarSet/research").hasAnyAuthority("admin", "pager")
+                .antMatchers("/LidarSet/project").hasAnyAuthority("admin", "pager")
+                .antMatchers("/LidarSet/publications").hasAnyAuthority("admin", "pager")
+                .antMatchers("/LidarSet/aboutUs").hasAnyAuthority("admin", "pager")
                 .antMatchers("/LidarSet/settings/**").hasAnyAuthority("admin", "pager")
                 .antMatchers("/LidarSet/others").hasAuthority("admin");
         // 使用默认的登录页面

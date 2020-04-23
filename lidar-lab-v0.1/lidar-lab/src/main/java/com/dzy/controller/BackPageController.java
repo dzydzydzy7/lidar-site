@@ -1,15 +1,12 @@
 package com.dzy.controller;
 
-import com.dzy.pojo.People;
-import com.dzy.pojo.Research;
 import com.dzy.service.BannerService;
+import com.dzy.service.KvtableService;
 import com.dzy.service.PeopleService;
 import com.dzy.service.ResearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -23,6 +20,9 @@ public class BackPageController {
 
     @Autowired
     private ResearchService researchService;
+
+    @Autowired
+    private KvtableService kvtableService;
 
     @RequestMapping("/home")
     public String backDoorPage(Model model) {
@@ -39,6 +39,7 @@ public class BackPageController {
 
     @RequestMapping("/publications")
     public String publicationsPage(Model model) {
+        model.addAttribute("content", kvtableService.getPublications());
         return "spublications";
     }
 
@@ -48,13 +49,15 @@ public class BackPageController {
         return "sresearch";
     }
 
-    @RequestMapping("/gallery")
+    @RequestMapping("/project")
     public String galleryPage(Model model) {
-        return "sgallery";
+        model.addAttribute("content", kvtableService.getProject());
+        return "sproject";
     }
 
     @RequestMapping("/aboutUs")
     public String aboutUsPage(Model model) {
+        model.addAttribute("content", kvtableService.getAboutUs());
         return "saboutUs";
     }
 

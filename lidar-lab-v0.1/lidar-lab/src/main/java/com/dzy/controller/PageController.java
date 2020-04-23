@@ -2,6 +2,7 @@ package com.dzy.controller;
 
 import com.dzy.pojo.People;
 import com.dzy.pojo.Research;
+import com.dzy.service.KvtableService;
 import com.dzy.service.PeopleService;
 import com.dzy.service.ResearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class PageController {
     @Autowired
     private ResearchService researchService;
 
+    @Autowired
+    private KvtableService kvtableService;
+
     @RequestMapping("/home")
     public String homePage(Model model) {
         return "home";
@@ -33,6 +37,7 @@ public class PageController {
 
     @RequestMapping("/publications")
     public String publicationsPage(Model model) {
+        model.addAttribute("content", kvtableService.getPublications());
         return "publications";
     }
 
@@ -42,13 +47,15 @@ public class PageController {
         return "research";
     }
 
-    @RequestMapping("/gallery")
+    @RequestMapping("/project")
     public String galleryPage(Model model) {
-        return "gallery";
+        model.addAttribute("content", kvtableService.getProject());
+        return "project";
     }
 
     @RequestMapping("/aboutUs")
     public String aboutUsPage(Model model) {
+        model.addAttribute("content", kvtableService.getAboutUs());
         return "aboutUs";
     }
 

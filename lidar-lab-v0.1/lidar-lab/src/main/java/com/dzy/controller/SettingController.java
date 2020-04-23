@@ -10,6 +10,7 @@ import com.dzy.pojo.People;
 import com.dzy.pojo.Research;
 import com.dzy.pojo.User;
 import com.dzy.service.BannerService;
+import com.dzy.service.KvtableService;
 import com.dzy.service.PeopleService;
 import com.dzy.service.ResearchService;
 import com.dzy.utils.PictureUtils;
@@ -50,6 +51,9 @@ public class SettingController {
 
     @Autowired
     private ResearchService researchService;
+
+    @Autowired
+    private KvtableService kvtableService;
 
     @PostMapping(value = "/addBanner")
     public String setHome(MultipartFile picture, String text) {
@@ -186,6 +190,24 @@ public class SettingController {
     public String delResearch(@PathVariable int id) {
         researchService.deleteResearchById(id);
         return "redirect:/LidarSet/research";
+    }
+
+    @RequestMapping("/updPublication")
+    public String updPublication(String text){
+        kvtableService.setPublications(text);
+        return "redirect:/LidarSet/publications";
+    }
+
+    @PostMapping(value = "/updProject")
+    public String updProject(String text){
+        kvtableService.setProject(text);
+        return "redirect:/LidarSet/project";
+    }
+
+    @PostMapping(value = "/updAboutus")
+    public String updAboutus(String text) {
+        kvtableService.setAboutUs(text);
+        return "redirect:/LidarSet/aboutUs";
     }
 
     // 上传图片
