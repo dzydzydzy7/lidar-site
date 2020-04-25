@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理测试</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <style>
+        * {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="common/SHeader::sheader"></div>
+
+<p>已有用户</p>
+<ul id="allUsers"></ul>
+<hr>
+<form th:action="@{/settings/addUser}" method="post">
+<p>添加用户</p>
+<label for="usnm">用户名： </label><input id="usnm" name="username" type="text"><br>
+<label for="pswd">密码： </label><input id="pswd" name="password" type="text"><br>
+<label for="aauth">角色：</label>
+<select id="aauth" name="auth">
+    <option selected="selected">pager</option>
+    <option>admin</option>
+</select>
+<button id="btn-adduser" disabled="disabled" type="submit">添加用户</button>
+</form>
+<hr>
+<form th:action="@{/settings/delUser}" method="post">
+    <p>删除用户</p>
+    <label for="delun">要删除的用户名</label>
+    <input id="delun" name="username" type="text">
+    <button id="btn-deluser" disabled="disabled" type="submit">删除用户</button>
+</form>
+<hr>
+<form th:action="@{/settings/updUser}" method="post">
+    <p>修改用户</p>
+    <label for="uusnm">要修改的用户名</label>
+    <input id="uusnm" name="username" type="text"><br>
+    <label for="upswd">新密码</label>
+    <input id="upswd" name="password" type="text"><br>
+    <label for="uauth">新角色：</label>
+    <select id="uauth" name="auth">
+        <option selected="selected">pager</option>
+        <option>admin</option>
+    </select>
+    <button id="btn-upduser" disabled="disabled" type="submit">修改用户</button>
+</form>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+
+    layui.use('jquery', function () {
+        var $ = layui.jquery;
+    });
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+    //ajax请求区域
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        var index = null;
+        var $ = layui.jquery;
+        $.ajax({
+            url: '/getAllUsers',
+            method: 'post',
+            data: {},
+            dataType: 'JSON',
+            async: true,
+            success: function (res) {
+                var html = "";
+                for (var i = 0; i < res.length; i++) {
+                    html += "<li>" + "用户名: "
+                        + res[i].username + " 密码: "
+                        + res[i].password + " 角色:"
+                        + res[i].auth + "</li>";
+                }
+                $("#allUsers").html(html);
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        });
+
+        $(function () {
+            $("#usnm").on("input", function (e) {
+                $.post({
+                    url: "/isUserExist",
+                    data: {
+                        username: $('#usnm').val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.toString() === 'not') {
+                            $('#btn-adduser').attr("disabled", false);
+                        } else {
+                            $('#btn-adduser').attr("disabled", true);
+                        }
+                    }
+                });
+            });
+            $("#delun").on("input", function (e) {
+                $.post({
+                    url: "/isUserExist",
+                    data: {
+                        username: $('#delun').val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.toString() === 'exist') {
+                            $('#btn-deluser').attr("disabled", false);
+                        } else {
+                            $('#btn-deluser').attr("disabled", true);
+                        }
+                    }
+                });
+            })
+            $("#uusnm").on("input", function (e) {
+                $.post({
+                    url: "/isUserExist",
+                    data: {
+                        username: $('#uusnm').val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.toString() === 'exist') {
+                            $('#btn-upduser').attr("disabled", false);
+                        } else {
+                            $('#btn-upduser').attr("disabled", true);
+                        }
+                    }
+                })
+            })
+        })
+    });
+
+</script>
+</body>
+</html>

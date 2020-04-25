@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title th:text="publications"></title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet">
+    <link th:href="@{/styles/headerStyle.css}" rel="stylesheet" media="screen and (min-width: 1180px)">
+    <link th:href="@{/styles/headerMobile.css}" rel="stylesheet" media="screen and (max-width: 1179px)">
+    <link rel="stylesheet" th:href="@{/editormd/css/editormd.preview.css}" />
+    <link rel="shortcut icon" href="/pic/theico.ico" type="image/x-icon"/>
+</head>
+<body>
+<div th:replace="common/header::header"></div>
+
+<div style="height: 80px"></div>
+
+<div>
+    <!--文章主体内容-->
+    <div id="doc-content">
+        <textarea style="display:none;" placeholder="markdown" th:text="${content}"></textarea>
+    </div>
+</div>
+
+<div th:replace="common/footer::footer"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:src="@{/editormd/examples/js/jquery.min.js}"></script>
+<script th:src="@{/editormd/lib/marked.min.js}"></script>
+<script th:src="@{/editormd/lib/prettify.min.js}"></script>
+<script th:src="@{/editormd/lib/raphael.min.js}"></script>
+<script th:src="@{/editormd/lib/underscore.min.js}"></script>
+<script th:src="@{/editormd/lib/sequence-diagram.min.js}"></script>
+<script th:src="@{/editormd/lib/flowchart.min.js}"></script>
+<script th:src="@{/editormd/lib/jquery.flowchart.min.js}"></script>
+<script th:src="@{/editormd/editormd.js}"></script>
+<script>
+    layui.use('jquery',function() {
+        var $= layui.jquery;
+        var testEditor;
+        $(function () {
+            testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+                htmlDecode: "style,script,iframe",
+                emoji: true,
+                taskList: true,
+                tocm: true,
+                tex: true, // 默认不解析
+                flowChart: true, // 默认不解析
+                sequenceDiagram: true, // 默认不解析
+                codeFold: true
+            });
+        });
+
+        $("#doc-content").css("width", "80%").css("padding-left", "10%");
+
+        $(function () {
+            $("#doc-content").find("img").each(function () {
+                $(this).css("max-width", "60%");
+                // 这一句使得图片居中，editormd本身没有居中功能
+                $(this).wrap("<div align='center'></div>");
+            });
+            $("#doc-content").find("h1").each(function () {
+                $(this).css("font-family", "Italic");
+                $(this).css("font-style", "Italic");
+                $(this).css("font-weight", "normal");
+                $(this).css("border-bottom", "1px solid #333");
+            });
+            $("#doc-content").find("h2").each(function () {
+                $(this).css("text-align", "center");
+                $(this).css("font-weight", "normal");
+                $(this).css("border-bottom", "0");
+            });
+        })
+    });
+    //JavaScript代码区域
+    layui.use('element', function() {
+        var element = layui.element;
+    });
+</script>
+</body>
+</html>
