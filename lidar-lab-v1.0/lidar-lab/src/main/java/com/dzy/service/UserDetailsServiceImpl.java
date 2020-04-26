@@ -20,6 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    // 返回用户名、密码和用户角色
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (StringUtils.isEmpty(username)) {

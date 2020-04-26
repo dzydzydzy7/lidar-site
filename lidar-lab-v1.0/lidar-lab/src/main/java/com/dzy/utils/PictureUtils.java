@@ -10,6 +10,7 @@ public class PictureUtils {
     @Autowired
     private ProgramUtils programUtils;
 
+    // 把图片转为URL，已经弃用的方法
     public String image2Url(String str){
         String res = programUtils.getBaseUrl();
         String[] strs = str.split("\\.");

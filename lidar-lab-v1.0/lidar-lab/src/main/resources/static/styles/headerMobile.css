@@ -19,3 +19,11 @@
     transform: translate(-50%, -50%);
     text-shadow: 0 0 2px black;
 }
+
+.layui-nav {
+    background-color: #F2F2F2;
+}
+
+.layui-nav .layui-nav-more {
+    border-top-color: #5FB878;
+}
