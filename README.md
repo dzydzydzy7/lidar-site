@@ -8,4 +8,4 @@ lidar-lab文件夹是网站的快速原型。lidar-lab-v0.1文件夹是开发迭
 
 数据库在快速原型阶段使用了redis，后来替换成了mysql。
 
-开发中遇到的问题及解决：[https://blog.csdn.net/dzydzy7/category_9928302.html][https://blog.csdn.net/dzydzy7/category_9928302.html]
+开发中遇到的问题及解决：https://blog.csdn.net/dzydzy7/category_9928302.html
